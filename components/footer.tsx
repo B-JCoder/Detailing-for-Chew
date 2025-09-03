@@ -116,7 +116,7 @@ export function Footer() {
 
         <div className="border-t border-background/20 mt-8 pt-8 text-center">
           <p className="text-sm opacity-80">
-            © 2024 Detailing for Chew. All rights reserved. | Serving the Twin Cities Metro Area
+            © 2025 Detailing for Chew. All rights reserved. | Serving the Twin Cities Metro Area
           </p>
         </div>
       </div>
