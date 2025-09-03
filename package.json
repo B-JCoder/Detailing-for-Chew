@@ -78,5 +78,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B-JCoder/Detailing-for-Chew.git"
+  },
+  "bugs": {
+    "url": "https://github.com/B-JCoder/Detailing-for-Chew/issues"
+  },
+  "homepage": "https://github.com/B-JCoder/Detailing-for-Chew#readme",
   "description": ""
 }
