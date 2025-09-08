@@ -14,7 +14,7 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <ServicesSection />
-        <PricingSection />
+        {/* <PricingSection /> */}
         <GallerySection />
          <TestimonialsSection />
         <ContactSection />

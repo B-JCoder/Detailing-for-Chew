@@ -18,8 +18,8 @@ export function Footer() {
           {/* Business Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <Image src="/img/logo.png" alt="Logo" width={24} height={24} className="object-contain" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center">
+                <Image src="/img/logo.png" alt="Logo" width={60} height={60} className="object-contain" />
               </div>
               <div>
                 <h3 className="font-bold text-lg">Detailing for Chew</h3>
