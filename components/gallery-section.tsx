@@ -4,22 +4,56 @@ import { useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react"
+import { X, ZoomIn, ChevronLeft, ChevronRight, Play } from "lucide-react"
 
-const galleryImages = [
+const galleryItems = [
+  {
+    src: "/img/image0.jpeg",
+    alt: "Professional car interior detailing",
+    category: "Interior",
+    title: "Premium Interior Detail",
+    description: "Complete interior transformation with leather conditioning and deep cleaning",
+    type: "image",
+  },
+  {
+    src: "/img/image1.jpeg",
+    alt: "Truck exterior after professional detailing",
+    category: "Exterior",
+    title: "Truck Exterior Detail",
+    description: "Full exterior wash, wax, and protection for lasting shine",
+    type: "image",
+  },
+  {
+    src: "/img/Video_1.mov",
+    alt: "Car detailing process in action",
+    category: "Process",
+    title: "Detailing in Action",
+    description: "Watch our professional detailing process from start to finish",
+    type: "video",
+  },
+  {
+    src: "/img/Video_2.mov",
+    alt: "Professional car cleaning technique",
+    category: "Process",
+    title: "Professional Techniques",
+    description: "See the precision and care we put into every detail",
+    type: "video",
+  },
+  {
+    src: "/img/Video_3.mov",
+    alt: "Car detailing transformation",
+    category: "Process",
+    title: "Complete Transformation",
+    description: "Experience the full transformation process of vehicle detailing",
+    type: "video",
+  },
   {
     src: "/luxury-sedan-after-professional-detailing-with-glo.png",
     alt: "Luxury sedan after detailing",
     category: "Exterior",
-    title: "Premium Sedan Detail",
+    title: "Luxury Sedan Detail",
     description: "Complete exterior transformation with ceramic coating protection",
-  },
-  {
-    src: "/car-interior-leather-seats-professionally-cleaned-.png",
-    alt: "Clean car interior",
-    category: "Interior",
-    title: "Interior Deep Clean",
-    description: "Professional leather conditioning and deep cleaning service",
+    type: "image",
   },
   {
     src: "/sports-car-with-ceramic-coating-showing-water-bead.png",
@@ -27,6 +61,7 @@ const galleryImages = [
     category: "Ceramic Coating",
     title: "Ceramic Protection",
     description: "Long-lasting ceramic coating with hydrophobic properties",
+    type: "image",
   },
   {
     src: "/suv-engine-bay-professionally-detailed-and-cleaned.png",
@@ -34,32 +69,20 @@ const galleryImages = [
     category: "Engine Bay",
     title: "Engine Bay Clean",
     description: "Thorough engine bay cleaning and protection service",
-  },
-  {
-    src: "/luxury-car-headlights-restored-to-crystal-clear-co.png",
-    alt: "Headlight restoration",
-    category: "Restoration",
-    title: "Headlight Restoration",
-    description: "Crystal clear headlight restoration for improved visibility",
-  },
-  {
-    src: "/convertible-car-with-perfect-paint-correction-and-.png",
-    alt: "Paint correction results",
-    category: "Paint Correction",
-    title: "Paint Perfection",
-    description: "Professional paint correction removing swirls and scratches",
+    type: "image",
   },
 ]
 
-const categories = ["All", "Exterior", "Interior", "Ceramic Coating", "Engine Bay", "Restoration", "Paint Correction"]
+const categories = ["All", "Exterior", "Interior", "Process", "Ceramic Coating", "Engine Bay"]
 
 export function GallerySection() {
   const [selectedCategory, setSelectedCategory] = useState("All")
-  const [lightboxImage, setLightboxImage] = useState<number | null>(null)
+  const [lightboxItem, setLightboxItem] = useState<number | null>(null)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
-  const filteredImages =
-    selectedCategory === "All" ? galleryImages : galleryImages.filter((image) => image.category === selectedCategory)
+  const filteredItems =
+    selectedCategory === "All" ? galleryItems : galleryItems.filter((item) => item.category === selectedCategory)
 
   const handleCategoryChange = (category: string) => {
     if (category === selectedCategory) return
@@ -71,20 +94,35 @@ export function GallerySection() {
   }
 
   const openLightbox = (index: number) => {
-    setLightboxImage(index)
+    setLightboxItem(index)
+    setIsVideoPlaying(false)
   }
 
   const closeLightbox = () => {
-    setLightboxImage(null)
+    setLightboxItem(null)
+    setIsVideoPlaying(false)
   }
 
   const navigateLightbox = (direction: "prev" | "next") => {
-    if (lightboxImage === null) return
+    if (lightboxItem === null) return
     const newIndex =
       direction === "prev"
-        ? (lightboxImage - 1 + filteredImages.length) % filteredImages.length
-        : (lightboxImage + 1) % filteredImages.length
-    setLightboxImage(newIndex)
+        ? (lightboxItem - 1 + filteredItems.length) % filteredItems.length
+        : (lightboxItem + 1) % filteredItems.length
+    setLightboxItem(newIndex)
+    setIsVideoPlaying(false)
+  }
+
+  const toggleVideoPlayback = () => {
+    const video = document.querySelector("#lightbox-video") as HTMLVideoElement
+    if (video) {
+      if (isVideoPlaying) {
+        video.pause()
+      } else {
+        video.play()
+      }
+      setIsVideoPlaying(!isVideoPlaying)
+    }
   }
 
   return (
@@ -127,33 +165,51 @@ export function GallerySection() {
         <div
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300 ${isAnimating ? "opacity-50 scale-95" : "opacity-100 scale-100"}`}
         >
-          {filteredImages.map((image, index) => (
+          {filteredItems.map((item, index) => (
             <Card
               key={`${selectedCategory}-${index}`}
               className="overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group border-0 bg-white/90 backdrop-blur-sm transform hover:scale-105 cursor-pointer"
               onClick={() => openLightbox(index)}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={image.src || "/placeholder.svg"}
-                  alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    muted
+                    loop
+                    preload="metadata"
+                    onMouseEnter={(e) => e.currentTarget.play()}
+                    onMouseLeave={(e) => e.currentTarget.pause()}
+                  />
+                ) : (
+                  <img
+                    src={item.src || "/placeholder.svg"}
+                    alt={item.alt}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                )}
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <ZoomIn className="w-6 h-6 text-blue-600" />
+                    {item.type === "video" ? (
+                      <Play className="w-6 h-6 text-blue-600" />
+                    ) : (
+                      <ZoomIn className="w-6 h-6 text-blue-600" />
+                    )}
                   </div>
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-bold text-xl mb-2">{image.title}</h3>
+                  <h3 className="font-bold text-xl mb-2">{item.title}</h3>
                   <p className="text-blue-100 text-sm mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                    {image.description}
+                    {item.description}
                   </p>
                   <Badge variant="secondary" className="bg-white/20 backdrop-blur-sm text-white border-white/30">
-                    {image.category}
+                    {item.category}
                   </Badge>
                 </div>
               </div>
@@ -177,14 +233,26 @@ export function GallerySection() {
         </div>
       </div>
 
-      {lightboxImage !== null && (
+      {lightboxItem !== null && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full">
-            <img
-              src={filteredImages[lightboxImage].src || "/placeholder.svg"}
-              alt={filteredImages[lightboxImage].alt}
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-            />
+            {filteredItems[lightboxItem].type === "video" ? (
+              <video
+                id="lightbox-video"
+                src={filteredItems[lightboxItem].src}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                controls
+                preload="metadata"
+                onPlay={() => setIsVideoPlaying(true)}
+                onPause={() => setIsVideoPlaying(false)}
+              />
+            ) : (
+              <img
+                src={filteredItems[lightboxItem].src || "/placeholder.svg"}
+                alt={filteredItems[lightboxItem].alt}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              />
+            )}
 
             {/* Close button */}
             <Button
@@ -215,10 +283,10 @@ export function GallerySection() {
               <ChevronRight className="w-6 h-6" />
             </Button>
 
-            {/* Image info */}
+            {/* Image/Video info */}
             <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg p-4 text-white">
-              <h3 className="font-bold text-xl mb-1">{filteredImages[lightboxImage].title}</h3>
-              <p className="text-blue-100">{filteredImages[lightboxImage].description}</p>
+              <h3 className="font-bold text-xl mb-1">{filteredItems[lightboxItem].title}</h3>
+              <p className="text-blue-100">{filteredItems[lightboxItem].description}</p>
             </div>
           </div>
         </div>
