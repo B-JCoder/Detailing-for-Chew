@@ -41,7 +41,7 @@ export function Header() {
                 isScrolled ? "bg-gradient-to-br from-blue-600 to-cyan-600" : "bg-white/20 backdrop-blur-sm"
               }`}
             >
-              <Image src="/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
+              <Image src="/img/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
             </div>
             <div>
               <h1
