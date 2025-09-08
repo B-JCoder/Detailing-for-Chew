@@ -2,7 +2,7 @@
 
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
+import Image from "next/image"
 export function Footer() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -19,7 +19,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold">DC</span>
+                <Image src="/logo.png" alt="Logo" width={24} height={24} className="object-contain" />
               </div>
               <div>
                 <h3 className="font-bold text-lg">Detailing for Chew</h3>
