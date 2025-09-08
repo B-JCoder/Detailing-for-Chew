@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone, Mail, Car } from "lucide-react"
+import { Menu, X, Phone, Mail } from "lucide-react"
 import Image from "next/image"
 
 export function Header() {
@@ -35,13 +35,25 @@ export function Header() {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection("home")}>
+          {/* Logo */}
+          <div
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => scrollToSection("home")}
+          >
             <div
               className={`w-22 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ${
-                isScrolled ? "bg-gradient-to-br from-blue-600 to-cyan-600" : "bg-white/20 backdrop-blur-sm"
+                isScrolled
+                  ? "bg-gradient-to-br from-blue-600 to-cyan-600"
+                  : "bg-white/20 backdrop-blur-sm"
               }`}
             >
-              <Image src="/img/logo.png" alt="Logo" width={100} height={100} className="object-contain" />
+              <Image
+                src="/img/logo.png"
+                alt="Logo"
+                width={100}
+                height={100}
+                className="object-contain"
+              />
             </div>
             <div>
               <h1
@@ -51,19 +63,28 @@ export function Header() {
               >
                 Detailing for Chew
               </h1>
-              <p className={`text-sm transition-colors duration-300 ${isScrolled ? "text-blue-600" : "text-blue-100"}`}>
+              <p
+                className={`text-sm transition-colors duration-300 ${
+                  isScrolled ? "text-blue-600" : "text-blue-100"
+                }`}
+              >
                 Luxury in Every Detail
               </p>
             </div>
           </div>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8">
             {["home", "services", "pricing", "gallery", "contact"].map((section) => (
               <button
                 key={section}
-                onClick={() => scrollToSection(section)}
+                onClick={() =>
+                  scrollToSection(section === "pricing" ? "services" : section)
+                }
                 className={`font-medium capitalize transition-all duration-300 hover:scale-105 ${
-                  isScrolled ? "text-slate-700 hover:text-blue-600" : "text-white hover:text-blue-200"
+                  isScrolled
+                    ? "text-slate-700 hover:text-blue-600"
+                    : "text-white hover:text-blue-200"
                 }`}
               >
                 {section}
@@ -71,6 +92,7 @@ export function Header() {
             ))}
           </nav>
 
+          {/* Contact Info (Desktop) */}
           <div className="hidden lg:flex items-center space-x-6">
             <div
               className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
@@ -90,11 +112,14 @@ export function Header() {
             </div>
           </div>
 
+          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="sm"
             className={`md:hidden transition-all duration-300 ${
-              isScrolled ? "text-slate-700 hover:bg-blue-50" : "text-white hover:bg-white/20"
+              isScrolled
+                ? "text-slate-700 hover:bg-blue-50"
+                : "text-white hover:bg-white/20"
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -102,6 +127,7 @@ export function Header() {
           </Button>
         </div>
 
+        {/* Mobile Nav */}
         {isMenuOpen && (
           <nav
             className={`md:hidden mt-6 pb-6 border-t transition-all duration-300 ${
@@ -112,15 +138,25 @@ export function Header() {
               {["home", "services", "pricing", "gallery", "contact"].map((section) => (
                 <button
                   key={section}
-                  onClick={() => scrollToSection(section)}
+                  onClick={() =>
+                    scrollToSection(section === "pricing" ? "services" : section)
+                  }
                   className={`text-left font-medium capitalize transition-all duration-300 hover:translate-x-2 ${
-                    isScrolled ? "text-slate-700 hover:text-blue-600" : "text-white hover:text-blue-200"
+                    isScrolled
+                      ? "text-slate-700 hover:text-blue-600"
+                      : "text-white hover:text-blue-200"
                   }`}
                 >
                   {section}
                 </button>
               ))}
-              <div className={`pt-4 border-t space-y-3 ${isScrolled ? "border-blue-100" : "border-white/20"}`}>
+
+              {/* Contact Info (Mobile) */}
+              <div
+                className={`pt-4 border-t space-y-3 ${
+                  isScrolled ? "border-blue-100" : "border-white/20"
+                }`}
+              >
                 <div
                   className={`flex items-center space-x-2 text-sm font-medium ${
                     isScrolled ? "text-slate-600" : "text-blue-100"

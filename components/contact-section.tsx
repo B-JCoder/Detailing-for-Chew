@@ -161,15 +161,17 @@ export function ContactSection() {
                         <SelectTrigger className="h-12 border-slate-200 focus:border-blue-500">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="express">Express Detail ($59)</SelectItem>
-                          <SelectItem value="exterior">Exterior Wash & Wax ($89)</SelectItem>
-                          <SelectItem value="interior">Interior Detailing ($129)</SelectItem>
-                          <SelectItem value="full">Full Detail Package ($249)</SelectItem>
-                          <SelectItem value="luxury">Luxury Package ($399)</SelectItem>
-                          <SelectItem value="ceramic">Ceramic Coating ($599)</SelectItem>
-                          <SelectItem value="custom">Custom Quote</SelectItem>
-                        </SelectContent>
+                       <SelectContent>
+  <SelectItem value="express">Express Detail (Starting at $59)</SelectItem>
+  <SelectItem value="exterior">Exterior Wash (Starting at $75)</SelectItem>
+  <SelectItem value="interior">Interior Detailing (Starting at $150)</SelectItem>
+  <SelectItem value="full">Full Detail Package (Starting at $200)</SelectItem>
+  <SelectItem value="premium">Premium Interior (Starting at $200)</SelectItem>
+  <SelectItem value="luxury">Luxury Detail (Starting at $750)</SelectItem>
+  <SelectItem value="ceramic">Ceramic Coating (Starting at $599)</SelectItem>
+  <SelectItem value="custom">Custom Quote</SelectItem>
+</SelectContent>
+
                       </Select>
                     </div>
                   </div>
@@ -250,33 +252,33 @@ export function ContactSection() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-slate-800">Follow Us</CardTitle>
-                <CardDescription className="text-lg text-slate-600">
-                  Stay updated with our latest work and offers
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex space-x-4">
-                  {[
-                    { icon: Facebook, color: "hover:bg-blue-600", label: "Facebook" },
-                    { icon: Instagram, color: "hover:bg-pink-600", label: "Instagram" },
-                    { icon: Twitter, color: "hover:bg-sky-500", label: "Twitter" },
-                  ].map((social, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      size="icon"
-                      className={`w-12 h-12 border-2 border-slate-200 ${social.color} hover:text-white transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg`}
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </Button>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+           <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
+  <CardHeader>
+    <CardTitle className="text-2xl font-bold text-slate-800">Follow Us</CardTitle>
+    <CardDescription className="text-lg text-slate-600">
+      Stay updated with our latest work and offers
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <div className="flex space-x-4">
+      <a
+        href="https://www.facebook.com/profile.php?id=61578567300427"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button
+          variant="outline"
+          size="icon"
+          className="w-12 h-12 border-2 border-slate-200 hover:bg-blue-600 hover:text-white transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg"
+          aria-label="Facebook"
+        >
+          <Facebook className="w-5 h-5" />
+        </Button>
+      </a>
+    </div>
+  </CardContent>
+</Card>
+
 
             <Card className="shadow-xl border-0 bg-gradient-to-br from-blue-600 to-cyan-600 text-white hover:shadow-2xl transition-shadow duration-300">
               <CardContent className="p-8">

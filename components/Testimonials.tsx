@@ -57,7 +57,7 @@ const testimonials = [
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">What Our Customers Say</h2>
           <p className="text-xl text-muted-white max-w-3xl mx-auto text-pretty">
-            Here’s what happy customers across Sun City West, Surprise, and Maricopa County are saying about Falcon Auto Detail.
+            Here’s what happy customers across Twin Cities Metro Area are saying about Detailing for Chew.
           </p>
         </div>
 
