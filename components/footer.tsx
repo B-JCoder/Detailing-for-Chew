@@ -101,15 +101,21 @@ export function Footer() {
             </div>
 
             <div className="flex space-x-2 pt-2">
-              <Button variant="ghost" size="icon" className="text-background hover:bg-background/10">
-                <Facebook className="w-4 h-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-background hover:bg-background/10">
-                <Instagram className="w-4 h-4" />
-              </Button>
-              <Button variant="ghost" size="icon" className="text-background hover:bg-background/10">
-                <Twitter className="w-4 h-4" />
-              </Button>
+            <a
+  href="https://www.facebook.com/profile.php?id=61578567300427"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button
+    variant="ghost"
+    size="icon"
+    className="text-background hover:bg-background/10"
+  >
+    <Facebook className="w-4 h-4" />
+  </Button>
+</a>
+
+             
             </div>
           </div>
         </div>

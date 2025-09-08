@@ -1,63 +1,67 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 export function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-  }
-const testimonials = [
-  {
-    name: "David M.",
-    location: "Dallas, TX",
-    rating: 5,
-    text: "Detailing For Chew did an amazing job on my car. The exterior shines like it’s brand new, and they even removed those tough spots I thought would never come off!",
-    image: "/professional-man-smiling-headshot.png",
-  },
-  {
-    name: "Sarah L.",
-    location: "Plano, TX",
-    rating: 5,
-    text: "I had the interior detailing done, and wow—it’s spotless! My car smells great, the seats look refreshed, and everything feels so clean and comfortable.",
-    image: "/professional-asian-woman-headshot.png",
-  },
-  {
-    name: "James R.",
-    location: "Frisco, TX",
-    rating: 5,
-    text: "They did a full detail for my SUV, and the results were outstanding. From the tires to the windows, every part of my vehicle looks better than ever.",
-    image: "/professional-man-with-beard-smiling-headshot.png",
-  },
-  {
-    name: "Emily T.",
-    location: "McKinney, TX",
-    rating: 5,
-    text: "I highly recommend Detailing For Chew. The team was professional, fast, and left my car looking like it just came out of the showroom.",
-    image: "/professional-woman-smiling-headshot.png",
-  },
-]
-
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+  const testimonials = [
+    {
+      name: "David M.",
+      location: "Dallas, TX",
+      rating: 5,
+      text: "Detailing For Chew did an amazing job on my car. The exterior shines like it’s brand new, and they even removed those tough spots I thought would never come off!",
+      image: "/professional-man-smiling-headshot.png",
+    },
+    {
+      name: "Sarah L.",
+      location: "Plano, TX",
+      rating: 5,
+      text: "I had the interior detailing done, and wow—it’s spotless! My car smells great, the seats look refreshed, and everything feels so clean and comfortable.",
+      image: "/professional-asian-woman-headshot.png",
+    },
+    {
+      name: "James R.",
+      location: "Frisco, TX",
+      rating: 5,
+      text: "They did a full detail for my SUV, and the results were outstanding. From the tires to the windows, every part of my vehicle looks better than ever.",
+      image: "/professional-man-with-beard-smiling-headshot.png",
+    },
+    {
+      name: "Emily T.",
+      location: "McKinney, TX",
+      rating: 5,
+      text: "I highly recommend Detailing For Chew. The team was professional, fast, and left my car looking like it just came out of the showroom.",
+      image: "/professional-woman-smiling-headshot.png",
+    },
+  ];
 
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
 
   return (
     <section id="testimonials" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">What Our Customers Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
+            What Our Customers Say
+          </h2>
           <p className="text-xl text-muted-white max-w-3xl mx-auto text-pretty">
-            Here’s what happy customers across Twin Cities Metro Area are saying about Detailing for Chew.
+            Here’s what happy customers across Twin Cities Metro Area are saying
+            about Detailing for Chew.
           </p>
         </div>
 
@@ -68,7 +72,10 @@ const testimonials = [
                 {/* Stars */}
                 <div className="flex justify-center mb-4">
                   {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    <Star
+                      key={i}
+                      className="h-5 w-5 text-yellow-400 fill-current"
+                    />
                   ))}
                 </div>
 
@@ -85,8 +92,12 @@ const testimonials = [
                     className="w-16 h-16 rounded-full object-cover"
                   />
                   <div className="text-left">
-                    <div className="font-semibold text-card-foreground">{testimonials[currentIndex].name}</div>
-                    <div className="text-muted-foreground">{testimonials[currentIndex].location}</div>
+                    <div className="font-semibold text-card-foreground">
+                      {testimonials[currentIndex].name}
+                    </div>
+                    <div className="text-muted-foreground">
+                      {testimonials[currentIndex].location}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -114,7 +125,9 @@ const testimonials = [
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${index === currentIndex ? "bg-primary" : "bg-muted"}`}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                index === currentIndex ? "bg-primary" : "bg-muted"
+              }`}
             />
           ))}
         </div>
@@ -130,5 +143,5 @@ const testimonials = [
         </div>
       </div>
     </section>
-  )
+  );
 }
