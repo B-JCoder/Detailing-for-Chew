@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Phone, Mail, Car } from "lucide-react"
+import Image from "next/image"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -40,7 +41,7 @@ export function Header() {
                 isScrolled ? "bg-gradient-to-br from-blue-600 to-cyan-600" : "bg-white/20 backdrop-blur-sm"
               }`}
             >
-              <Car className={`w-6 h-6 ${isScrolled ? "text-white" : "text-white"}`} />
+              <Image src="/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
             </div>
             <div>
               <h1
