@@ -3,6 +3,7 @@
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+
 export function Footer() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -19,7 +20,13 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-20 h-20 rounded-full flex items-center justify-center">
-                <Image src="/img/logo.png" alt="Logo" width={60} height={60} className="object-contain" />
+                <Image
+                  src="/img/logo.png"
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h3 className="font-bold text-lg">Detailing for Chew</h3>
@@ -27,8 +34,8 @@ export function Footer() {
               </div>
             </div>
             <p className="text-sm opacity-80">
-              Professional car detailing services serving the Twin Cities metro area with premium quality and
-              exceptional customer service.
+              Professional car detailing services serving the Twin Cities metro area with premium
+              quality and exceptional customer service.
             </p>
           </div>
 
@@ -86,40 +93,82 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Contact</h4>
             <div className="space-y-3">
-              <div className="flex items-center space-x-2 text-sm">
+              {/* Phone */}
+              <a
+                href="tel:8703161464"
+                className="flex items-center space-x-2 text-sm hover:text-blue-600 transition-colors"
+              >
                 <Phone className="w-4 h-4" />
                 <span>870-316-1464</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
+              </a>
+
+              {/* Email */}
+              <a
+                href="mailto:detailingforchew@gmail.com"
+                className="flex items-center space-x-2 text-sm hover:text-blue-600 transition-colors"
+              >
                 <Mail className="w-4 h-4" />
                 <span>detailingforchew@gmail.com</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
+              </a>
+
+              {/* Address */}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Twin+Cities+Metro+Area"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-sm hover:text-blue-600 transition-colors"
+              >
                 <MapPin className="w-4 h-4" />
                 <span>Twin Cities Metro Area</span>
-              </div>
+              </a>
             </div>
 
+            {/* Social Media */}
             <div className="flex space-x-2 pt-2">
-            <a
-  href="https://www.facebook.com/profile.php?id=61578567300427"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button
-    variant="ghost"
-    size="icon"
-    className="text-background hover:bg-background/10"
-  >
-    <Facebook className="w-4 h-4" />
-  </Button>
-</a>
-
-             
+              <a
+                href="https://www.facebook.com/profile.php?id=61578567300427"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-background hover:bg-background/10"
+                >
+                  <Facebook className="w-4 h-4" />
+                </Button>
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-background hover:bg-background/10"
+                >
+                  <Instagram className="w-4 h-4" />
+                </Button>
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-background hover:bg-background/10"
+                >
+                  <Twitter className="w-4 h-4" />
+                </Button>
+              </a>
             </div>
           </div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="border-t border-background/20 mt-8 pt-8 text-center">
           <p className="text-sm opacity-80">
             © 2025 Detailing for Chew. All rights reserved. | Serving the Twin Cities Metro Area

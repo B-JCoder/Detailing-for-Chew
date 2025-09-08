@@ -93,24 +93,29 @@ export function Header() {
           </nav>
 
           {/* Contact Info (Desktop) */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <div
-              className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "text-slate-600" : "text-blue-100"
-              }`}
-            >
-              <Phone className="w-4 h-4" />
-              <span>870-316-1464</span>
-            </div>
-            <div
-              className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "text-slate-600" : "text-blue-100"
-              }`}
-            >
-              <Mail className="w-4 h-4" />
-              <span>detailingforchew@gmail.com</span>
-            </div>
-          </div>
+        <div className="hidden lg:flex items-center space-x-6">
+  {/* Phone */}
+  <a
+    href="tel:8703161464"
+    className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
+      isScrolled ? "text-slate-600" : "text-blue-100"
+    }`}
+  >
+    <Phone className="w-4 h-4" />
+    <span>870-316-1464</span>
+  </a>
+
+  {/* Email */}
+  <a
+    href="mailto:detailingforchew@gmail.com"
+    className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
+      isScrolled ? "text-slate-600" : "text-blue-100"
+    }`}
+  >
+    <Mail className="w-4 h-4" />
+    <span>detailingforchew@gmail.com</span>
+  </a>
+</div>
 
           {/* Mobile Menu Button */}
           <Button
