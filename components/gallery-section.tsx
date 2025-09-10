@@ -23,29 +23,54 @@ const galleryItems = [
     description: "Full exterior wash, wax, and protection for lasting shine",
     type: "image",
   },
+  // ✅ YouTube Shorts instead of .mov videos
   {
-    src: "/img/Video_1.mov",
+    src: "https://www.youtube.com/embed/MrF2rTNCO0c",
     alt: "Car detailing process in action",
     category: "Process",
     title: "Detailing in Action",
     description: "Watch our professional detailing process from start to finish",
-    type: "video",
+    type: "youtube",
   },
   {
-    src: "/img/Video_2.mov",
+    src: "https://www.youtube.com/embed/7JQL2--qMbU",
     alt: "Professional car cleaning technique",
     category: "Process",
     title: "Professional Techniques",
     description: "See the precision and care we put into every detail",
-    type: "video",
+    type: "youtube",
   },
   {
-    src: "/img/Video_3.mov",
+    src: "https://www.youtube.com/embed/MMrMiAf_6Uc",
     alt: "Car detailing transformation",
     category: "Process",
     title: "Complete Transformation",
     description: "Experience the full transformation process of vehicle detailing",
-    type: "video",
+    type: "youtube",
+  },
+  {
+    src: "https://www.youtube.com/embed/a7ikg5sH80w",
+    alt: "Car detailing demo",
+    category: "Process",
+    title: "Detailing Demo",
+    description: "Step-by-step detailing demonstration",
+    type: "youtube",
+  },
+  {
+    src: "https://www.youtube.com/embed/FrdzHsy2m0w",
+    alt: "Quick detailing clip",
+    category: "Process",
+    title: "Quick Detailing Clip",
+    description: "Short glimpse of our detailing workflow",
+    type: "youtube",
+  },
+  {
+    src: "https://www.youtube.com/embed/AFxKyZid4ZQ",
+    alt: "Car detailing showcase",
+    category: "Process",
+    title: "Showcase Video",
+    description: "Watch the results of professional detailing",
+    type: "youtube",
   },
   {
     src: "/luxury-sedan-after-professional-detailing-with-glo.png",
@@ -79,7 +104,6 @@ export function GallerySection() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [lightboxItem, setLightboxItem] = useState<number | null>(null)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const filteredItems =
     selectedCategory === "All" ? galleryItems : galleryItems.filter((item) => item.category === selectedCategory)
@@ -95,12 +119,10 @@ export function GallerySection() {
 
   const openLightbox = (index: number) => {
     setLightboxItem(index)
-    setIsVideoPlaying(false)
   }
 
   const closeLightbox = () => {
     setLightboxItem(null)
-    setIsVideoPlaying(false)
   }
 
   const navigateLightbox = (direction: "prev" | "next") => {
@@ -110,19 +132,6 @@ export function GallerySection() {
         ? (lightboxItem - 1 + filteredItems.length) % filteredItems.length
         : (lightboxItem + 1) % filteredItems.length
     setLightboxItem(newIndex)
-    setIsVideoPlaying(false)
-  }
-
-  const toggleVideoPlayback = () => {
-    const video = document.querySelector("#lightbox-video") as HTMLVideoElement
-    if (video) {
-      if (isVideoPlaying) {
-        video.pause()
-      } else {
-        video.play()
-      }
-      setIsVideoPlaying(!isVideoPlaying)
-    }
   }
 
   return (
@@ -163,7 +172,9 @@ export function GallerySection() {
         </div>
 
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300 ${isAnimating ? "opacity-50 scale-95" : "opacity-100 scale-100"}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300 ${
+            isAnimating ? "opacity-50 scale-95" : "opacity-100 scale-100"
+          }`}
         >
           {filteredItems.map((item, index) => (
             <Card
@@ -172,15 +183,13 @@ export function GallerySection() {
               onClick={() => openLightbox(index)}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                {item.type === "video" ? (
-                  <video
+                {item.type === "youtube" ? (
+                  <iframe
                     src={item.src}
+                    title={item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    muted
-                    loop
-                    preload="metadata"
-                    onMouseEnter={(e) => e.currentTarget.play()}
-                    onMouseLeave={(e) => e.currentTarget.pause()}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
                 ) : (
                   <img
@@ -195,7 +204,7 @@ export function GallerySection() {
 
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    {item.type === "video" ? (
+                    {item.type === "youtube" ? (
                       <Play className="w-6 h-6 text-blue-600" />
                     ) : (
                       <ZoomIn className="w-6 h-6 text-blue-600" />
@@ -236,15 +245,13 @@ export function GallerySection() {
       {lightboxItem !== null && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full">
-            {filteredItems[lightboxItem].type === "video" ? (
-              <video
-                id="lightbox-video"
+            {filteredItems[lightboxItem].type === "youtube" ? (
+              <iframe
                 src={filteredItems[lightboxItem].src}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                controls
-                preload="metadata"
-                onPlay={() => setIsVideoPlaying(true)}
-                onPause={() => setIsVideoPlaying(false)}
+                title={filteredItems[lightboxItem].title}
+                className="w-[90vw] h-[70vh] max-w-4xl rounded-lg shadow-2xl"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             ) : (
               <img
