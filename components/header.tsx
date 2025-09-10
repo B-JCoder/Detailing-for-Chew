@@ -96,13 +96,13 @@ export function Header() {
         <div className="hidden lg:flex items-center space-x-6">
   {/* Phone */}
   <a
-    href="tel:8703161464"
+    href="tel:870-771-3128"
     className={`flex items-center space-x-2 text-sm font-medium transition-colors duration-300 ${
       isScrolled ? "text-slate-600" : "text-blue-100"
     }`}
   >
     <Phone className="w-4 h-4" />
-    <span>870-316-1464</span>
+    <span>870-771-3128</span>
   </a>
 
   {/* Email */}
@@ -168,7 +168,7 @@ export function Header() {
                   }`}
                 >
                   <Phone className="w-4 h-4" />
-                  <span>870-316-1464</span>
+                  <span>870-771-3128</span>
                 </div>
                 <div
                   className={`flex items-center space-x-2 text-sm font-medium ${

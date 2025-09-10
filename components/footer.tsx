@@ -95,11 +95,11 @@ export function Footer() {
             <div className="space-y-3">
               {/* Phone */}
               <a
-                href="tel:8703161464"
+                href="870-771-3128"
                 className="flex items-center space-x-2 text-sm hover:text-blue-600 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>870-316-1464</span>
+                <span>870-771-3128</span>
               </a>
 
               {/* Email */}

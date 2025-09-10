@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter, CheckCircle, Loader2 } from "lucide-react"
+import { Phone, Mail, MapPin, Clock, Facebook, CheckCircle, Loader2 } from "lucide-react"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -34,49 +33,48 @@ export function ContactSection() {
     return Object.keys(newErrors).length === 0
   }
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
 
-  if (!validateForm()) return
+    if (!validateForm()) return
 
-  setIsSubmitting(true)
+    setIsSubmitting(true)
 
-  // WhatsApp message formatting
- const whatsappMessage = encodeURIComponent(
-  `Hello, I would like to request a quote.\n
+    // Raw WhatsApp message
+    const rawMessage = `Hello, I would like to request a quote.\n
 *Name:* ${formData.name}\n
 *Email:* ${formData.email}\n
 *Phone:* ${formData.phone || "N/A"}\n
 *Service:* ${formData.service || "Not specified"}\n
 *Message:* ${formData.message || "No additional details."}`
-)
 
-const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
+    // Encode for WhatsApp (works on web & app)
+    const whatsappMessage = encodeURIComponent(rawMessage)
 
+    // WhatsApp URL
+    const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
 
-  // Open in new tab
-  window.open(whatsappUrl, "_blank")
+    // Open WhatsApp Web/App
+    window.open(whatsappUrl, "_blank")
 
-  setIsSubmitting(false)
-  setIsSubmitted(true)
+    setIsSubmitting(false)
+    setIsSubmitted(true)
 
-  // Reset form after 3 seconds
-  setTimeout(() => {
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    })
-    setIsSubmitted(false)
-  }, 3000)
-}
-
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      })
+      setIsSubmitted(false)
+    }, 3000)
+  }
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
@@ -103,6 +101,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          {/* Form Card */}
           <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-sm">
             <CardHeader className="pb-8">
               <CardTitle className="text-2xl font-bold text-slate-800">Request a Quote</CardTitle>
@@ -120,6 +119,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Name */}
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-slate-700 font-medium">
                         Full Name *
@@ -135,6 +135,8 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
                       />
                       {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                     </div>
+
+                    {/* Email */}
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-slate-700 font-medium">
                         Email *
@@ -152,6 +154,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
                     </div>
                   </div>
 
+                  {/* Phone & Service */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="phone" className="text-slate-700 font-medium">
@@ -166,6 +169,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
                         className="h-12 border-slate-200 focus:border-blue-500 transition-colors duration-300"
                       />
                     </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="service" className="text-slate-700 font-medium">
                         Service Needed
@@ -174,21 +178,21 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
                         <SelectTrigger className="h-12 border-slate-200 focus:border-blue-500">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
-                       <SelectContent>
-  <SelectItem value="express">Express Detail (Starting at $59)</SelectItem>
-  <SelectItem value="exterior">Exterior Wash (Starting at $75)</SelectItem>
-  <SelectItem value="interior">Interior Detailing (Starting at $150)</SelectItem>
-  <SelectItem value="full">Full Detail Package (Starting at $200)</SelectItem>
-  <SelectItem value="premium">Premium Interior (Starting at $200)</SelectItem>
-  <SelectItem value="luxury">Luxury Detail (Starting at $750)</SelectItem>
-  <SelectItem value="ceramic">Ceramic Coating (Starting at $599)</SelectItem>
-  <SelectItem value="custom">Custom Quote</SelectItem>
-</SelectContent>
-
+                        <SelectContent>
+                          <SelectItem value="express">Express Detail (Starting at $59)</SelectItem>
+                          <SelectItem value="exterior">Exterior Wash (Starting at $75)</SelectItem>
+                          <SelectItem value="interior">Interior Detailing (Starting at $150)</SelectItem>
+                          <SelectItem value="full">Full Detail Package (Starting at $200)</SelectItem>
+                          <SelectItem value="premium">Premium Interior (Starting at $200)</SelectItem>
+                          <SelectItem value="luxury">Luxury Detail (Starting at $750)</SelectItem>
+                          <SelectItem value="ceramic">Ceramic Coating (Starting at $599)</SelectItem>
+                          <SelectItem value="custom">Custom Quote</SelectItem>
+                        </SelectContent>
                       </Select>
                     </div>
                   </div>
 
+                  {/* Message */}
                   <div className="space-y-2">
                     <Label htmlFor="message" className="text-slate-700 font-medium">
                       Message
@@ -203,6 +207,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
                     />
                   </div>
 
+                  {/* Submit Button */}
                   <Button
                     type="submit"
                     disabled={isSubmitting}
@@ -222,6 +227,7 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
             </CardContent>
           </Card>
 
+          {/* Contact Info + Social */}
           <div className="space-y-8">
             <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
               <CardHeader>
@@ -230,30 +236,13 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
               </CardHeader>
               <CardContent className="space-y-8">
                 {[
-                  { icon: Phone, title: "Phone", content: "870-316-1464", color: "from-green-500 to-emerald-500" },
-                  {
-                    icon: Mail,
-                    title: "Email",
-                    content: "detailingforchew@gmail.com",
-                    color: "from-blue-500 to-cyan-500",
-                  },
-                  {
-                    icon: MapPin,
-                    title: "Service Area",
-                    content: "Twin Cities Metro Area",
-                    color: "from-purple-500 to-pink-500",
-                  },
-                  {
-                    icon: Clock,
-                    title: "Hours",
-                    content: "Mon-Sat: 8AM-6PM\nSunday: By Appointment",
-                    color: "from-orange-500 to-red-500",
-                  },
+                  { icon: Phone, title: "Phone", content: "870-771-3128", color: "from-green-500 to-emerald-500" },
+                  { icon: Mail, title: "Email", content: "detailingforchew@gmail.com", color: "from-blue-500 to-cyan-500" },
+                  { icon: MapPin, title: "Service Area", content: "Twin Cities Metro Area", color: "from-purple-500 to-pink-500" },
+                  { icon: Clock, title: "Hours", content: "Mon-Sat: 8AM-6PM\nSunday: By Appointment", color: "from-orange-500 to-red-500" },
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-4 group">
-                    <div
-                      className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                    >
+                    <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -265,34 +254,29 @@ const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
               </CardContent>
             </Card>
 
-           <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
-  <CardHeader>
-    <CardTitle className="text-2xl font-bold text-slate-800">Follow Us</CardTitle>
-    <CardDescription className="text-lg text-slate-600">
-      Stay updated with our latest work and offers
-    </CardDescription>
-  </CardHeader>
-  <CardContent>
-    <div className="flex space-x-4">
-      <a
-        href="https://www.facebook.com/profile.php?id=61578567300427"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Button
-          variant="outline"
-          size="icon"
-          className="w-12 h-12 border-2 border-slate-200 hover:bg-blue-600 hover:text-white transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg"
-          aria-label="Facebook"
-        >
-          <Facebook className="w-5 h-5" />
-        </Button>
-      </a>
-    </div>
-  </CardContent>
-</Card>
+            {/* Socials */}
+            <Card className="shadow-xl border-0 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-slate-800">Follow Us</CardTitle>
+                <CardDescription className="text-lg text-slate-600">Stay updated with our latest work and offers</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex space-x-4">
+                  <a href="https://www.facebook.com/profile.php?id=61578567300427" target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="w-12 h-12 border-2 border-slate-200 hover:bg-blue-600 hover:text-white transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </Button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
 
-
+            {/* Mobile Service */}
             <Card className="shadow-xl border-0 bg-gradient-to-br from-blue-600 to-cyan-600 text-white hover:shadow-2xl transition-shadow duration-300">
               <CardContent className="p-8">
                 <div className="flex items-center space-x-4">
