@@ -34,32 +34,45 @@ export function ContactSection() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
 
-    if (!validateForm()) return
+  if (!validateForm()) return
 
-    setIsSubmitting(true)
+  setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+  // WhatsApp message formatting
+ const whatsappMessage = encodeURIComponent(
+  `Hello, I would like to request a quote.\n
+*Name:* ${formData.name}\n
+*Email:* ${formData.email}\n
+*Phone:* ${formData.phone || "N/A"}\n
+*Service:* ${formData.service || "Not specified"}\n
+*Message:* ${formData.message || "No additional details."}`
+)
 
-    console.log("Form submitted:", formData)
-    setIsSubmitted(true)
-    setIsSubmitting(false)
+const whatsappUrl = `https://wa.me/18703161464?text=${whatsappMessage}`
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-      })
-      setIsSubmitted(false)
-    }, 3000)
-  }
+
+  // Open in new tab
+  window.open(whatsappUrl, "_blank")
+
+  setIsSubmitting(false)
+  setIsSubmitted(true)
+
+  // Reset form after 3 seconds
+  setTimeout(() => {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    })
+    setIsSubmitted(false)
+  }, 3000)
+}
+
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
