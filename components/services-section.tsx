@@ -57,7 +57,7 @@ const services = [
     title: "Luxury Detail",
     description: "Complete premium service for ultimate care",
     features: ["Ceramic coating", "Paint correction", "Premium interior package"],
-    price: "Starting at $825",
+    price: "Starting at $850",
     popular: false,
     color: "from-pink-500 to-red-500",
   },
