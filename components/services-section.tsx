@@ -42,15 +42,7 @@ const services = [
     popular: false,
     color: "from-orange-500 to-red-500",
   },
-  {
-    icon: Zap,
-    title: "Express Detail",
-    description: "Quick refresh for busy schedules",
-    features: ["Exterior wash", "Interior vacuum", "Window cleaning"],
-    price: "Starting at $59",
-    popular: false,
-    color: "from-yellow-500 to-orange-500",
-  },
+
   {
     icon: Star,
     title: "Premium Interior",
