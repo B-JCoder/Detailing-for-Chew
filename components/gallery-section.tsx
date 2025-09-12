@@ -16,7 +16,7 @@ const galleryItems = [
     type: "image",
   },
   {
-    src: "/img/image1.jpeg",
+    src: "https://i.pinimg.com/1200x/65/c4/2b/65c42b6c4dcca9447b06b5282be6e87c.jpg",
     alt: "Truck exterior after professional detailing",
     category: "Exterior",
     title: "Truck Exterior Detail",
