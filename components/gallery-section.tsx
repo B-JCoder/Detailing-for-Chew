@@ -88,17 +88,10 @@ const galleryItems = [
     description: "Long-lasting ceramic coating with hydrophobic properties",
     type: "image",
   },
-  {
-    src: "/suv-engine-bay-professionally-detailed-and-cleaned.png",
-    alt: "Engine bay detailing",
-    category: "Engine Bay",
-    title: "Engine Bay Clean",
-    description: "Thorough engine bay cleaning and protection service",
-    type: "image",
-  },
+
 ]
 
-const categories = ["All", "Exterior", "Interior", "Process", "Ceramic Coating", "Engine Bay"]
+const categories = ["All", "Exterior", "Interior", "Process", "Ceramic Coating", ]
 
 export function GallerySection() {
   const [selectedCategory, setSelectedCategory] = useState("All")
